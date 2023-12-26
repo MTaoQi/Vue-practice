@@ -1,0 +1,57 @@
+<!-- M 模型Model  对应data种的数据(plain JavaScript objects)
+     V 视图 View   模板       (DOM页面)
+     VM 视图模型ViewModel  Vue实例对象
+
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>理解MVVM</title>
+     <script type="text/javascript" src="../js/vue.js" ></script>
+</head>
+<body>
+     <!-- 
+          MVVM 模型
+          1. M: 模型 Model  data中的数据
+          2. V: 视图 View 模板代码
+          3. VM: 视图类型ViewModel Vue实例
+          发现:
+          1. data中的所有的属性,最后都出现在了vm身上
+          2. vm身上所有的属性 及 Vue原型上所有的属性,在Vue模板中都可以直接使用
+      -->
+     <div id="root">
+          <h1>学校名称:{{name}}</h1>
+          <h1>学校地址:{{address}}</h1>
+          <h1>test1:{{1+1}}</h1>
+          <h1>test2:{{$options}}</h1>
+          <h1>test3:{{$emit}}</h1>
+          <h1>test4:{{_c}}</h1>
+          <img class="tp" src="./MVVM.png" alt="">
+          <img class="tp" src="./MVVM.jpg" alt="">
+     </div>
+    <!-- View -->
+</body>
+<script type="text/javascript" >
+     Vue.config.productionTip = false 
+
+    const vm =  new Vue({   //ViewModel
+          el:'#root',
+          data:{
+               name:'尚硅谷',
+               address:'北京'
+               // Model
+          }
+          
+     })
+     console.log(vm);
+</script>
+<style>
+.tp{
+     width: 100%;
+     height: 100%;
+}
+</style>
+</html>

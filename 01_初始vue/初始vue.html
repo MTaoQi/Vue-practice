@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初始vue</title>
+    <!-- 引入Vue   Vue构造函数 -->
+    
+<script type="text/javascript" src="../js/vue.js" ></script> 
+<!-- 开发版本vue -->
+<link rel="icon" href="../favicon.ico">
+</head>
+<body>
+    <!-- 1,创建一个人Vue实例，且要传入一个配置对象
+         2，root 容器被称为[Vue模板]
+         3，先有容器，再有实例  容器解析
+         4，一个实例接管一个容器  Vue实例和容器一一对应
+         5. 真实开发中只有一个Vue实例，并且会配合组件一起使用
+         6. {{xxx}}中xxx 要写js表达式，且xxx可以自动读取到data 中的所有属性
+         7. data变化，页面中用到该数据地方自动更新
+
+         注意区分 JS表达式和JS代码（语句）
+         1.表达式：一个表达式会产生一个值，可以放在任何一个需要值的地方
+                   (1)  a
+                   (2)  a+b 
+                   (3)  demo(1)  //const x =
+                   (4)   x===y?'a':'b'
+         2.js代码（语句）
+         if(){}
+         for(){}
+
+
+    -->
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h1>hello,{{name}},{{age}},{{1+1}}{{Date.now()}}</h1>
+        <button>点我更换名字</button>
+    </div>
+   <script type="text/javascript" >
+    Vue.config.productionTip = false  //以阻止 vue 在启动时生成生产提示。
+    //创建Vue实例
+       new Vue({
+        el:'#root' ,//el用于指定当前  Vue实例为那个容器服务，值通常为css选择器字符串
+        data:{//data中用于存储数据，数据供el所指定的容器去使用，值暂时  写一个对象
+            name:'马晓惠',
+            age:'18'
+        } //element
+    })
+    // axios({
+    //     url:'http://!!!!!'
+    // })
+
+   </script>
+
+
+   
+</body>
+</html>
