@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.姓名案例_methods实现</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        姓: <input type="text" v-model="firstName"> <br>
+        名: <input type="text" v-model="lastName"> <br>
+        全名: <span>{{fullName()}}</span> <br />
+        全名: <span>{{fullName()}}</span> <br />
+        全名: <span>{{fullName()}}</span> <br />
+        全名: <span>{{fullName()}}</span> <br />
+        全名: <span>{{fullName()}}</span> <br />
+
+
+
+    </div>
+
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#root',
+        data: {
+            firstName: '张',
+            lastName: '三'
+        },
+        //data数据变化,Vue模板重新解析,插值语法方法 重新调用
+        methods: {
+            fullName() {
+                console.log('@---fullName');  //调用没有缓存 调用好几遍
+             
+                return this.firstName + '-' + this.lastName
+            }
+        }
+    })
+</script>
+
+</html>
