@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3.姓名案例_计算属性实现</title>
+    <title>4.姓名案例_计算属性简写</title>
     <!-- 引入Vue -->
     <script type="text/javascript" src="../js/vue.js"></script>
 </head>
@@ -47,7 +47,7 @@
             //     }
             // }
 
-            // 简单写法  给vm放fullName属性  值为函数返回值   只有读取才可以这样写
+            // 简单写法  给vm放fullName属性  值为函数返回值   只有get读取才可以这样写
             fullName(){  
                 console.log('get被调用了');
               return this.firstName + '-' + this.lastName
