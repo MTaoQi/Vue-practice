@@ -73,6 +73,7 @@
         computed: {
             filPersons() {
                 return this.persons.filter((p) => {
+                    console.log(p.name.indexOf(this.keyWord) )
                     return p.name.indexOf(this.keyWord) !== -1
                 })
             }

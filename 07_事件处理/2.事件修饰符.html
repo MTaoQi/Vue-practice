@@ -13,7 +13,28 @@
             height: 50px;
             background-color: skyblue;
     
+            
         }
+        .box1{
+            padding: 5px;
+            background-color: skyblue;
+    
+        }
+        .box2{
+            padding: 5px;
+            background-color: orange;
+        }
+        .list{
+            width: 200px;
+            height: 200px;
+            background-color: peru;
+            overflow: auto;
+        }
+        li{
+            height: 100px;
+
+        }
+
     </style>
 </head>
 
@@ -24,23 +45,48 @@
         2.stop：阻止事件冒泡（常用）；
         3.once：事件只触发一次（常用）
         4.capture: 使用事件的捕获模式；
-        5.self：只有event.target是当前操作的元素是才触发事件；
-        6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕；
+        5.self：只有event.target是当前操作的元素时才触发事件；
+        6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕；手机平板移动端的
 
      -->
     <div id="root">
     <h1>欢迎来到{{name}}学习</h1>
-    <!-- prevent：阻止默认事件（常用）； -->
+    <!-- 1,prevent：阻止默认事件（常用）； prevent-->
     <a href="http://www.baidu.com" @click.prevent="showInfo">点我提示</a>
-    <!-- stop：阻止事件冒泡（常用）； -->
+    <!-- 2,stop：阻止事件冒泡（常用）； stop ,这个self也可-->
         <div class="demo1" @click="showInfo">
             <button @click.stop="showInfo">点我提示信息</button>
             <!-- 先停止默认 在阻止默认  修饰符连续写-->
             <!-- <a href="http://www.baidu.com" @click.stop.prevent="showInfo">点我提示信息</a> -->
         </div>
-        <!-- once：事件只触发一次（常用） -->
+        <!-- 3,once：事件只触发一次（常用）once -->
         <button @click.once="showInfo">点我提示信息</button>
-        <!-- 使用事件的捕获模式 -->
+        <!-- 4,capture使用事件的捕获模式  capture -->
+        <!-- 点box2 不加修饰符打印2，再打印1 ，先捕获（由外向内） 再冒泡（由内向外 处理事件） -->
+        <!-- 捕获时候就处理代码事件 -->
+        <div class="box1" @click.capture="showMsg(1)">
+            div1
+            <div class="box2"  @click="showMsg(2)">
+                div2
+            </div>
+        </div>
+
+        <!-- 5，self：只有event.target是当前操作的元素时才触发事件 -->
+        <div class="demo1" @click.self="showInfo">
+            <button @click="showInfo">点我提示信息</button>
+     
+        </div>
+        <!-- 6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕；手机平板移动端的 -->
+        <!-- 滚动事件 给
+             滚动条加的滚动事件@scroll（鼠标滚轮或者键盘上下键） 滑倒最下不能滑  不在触发
+             鼠标滚轮事件 @wheel 滑倒最下不能滑  只要滚轮滚 依旧触发
+        -->
+        <ul  @wheel.passive="demo" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
     </div>
 </body>
 <script type="text/javascript" >
@@ -55,6 +101,16 @@
             // e.preventDefault() 阻止默认行为
             // e.stopPropagation() 阻止事件冒泡
             alert("你好")
+            // console.log(e.target)
+        },
+        showMsg(msg){
+            console.log(msg)
+        },
+        demo(){
+          for (let i = 0; i < 100000; i++) {
+            console.log('#');
+          }
+          console.log('累坏了');
         }
     }
    })
