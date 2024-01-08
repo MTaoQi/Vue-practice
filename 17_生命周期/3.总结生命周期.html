@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>总结生命周期</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+
+<body>
+    <!-- 
+        常用的生命周期钩子
+            1.mounted：发送ajax请求、启动定时器、绑定自定义事件、订阅消息【初始化操作】
+            2.beforeDestroy：清楚定时器、解绑自定义事件、取消订阅消息等【收尾工作】
+
+        关于销毁Vue实例
+            1.销毁后借助Vue开发者工具看不到任何信息
+            2.销毁后自定义事件会失效，但原生DOM事件依然有效  现在好像事件都失效了
+            3.一般不会再beforeDestroy操作数据，因为即便操作数据，也不会再触发更新流程了
+
+     -->
+
+    <div id="root">
+
+        <h2 :style="{opacity}">欢迎学习Vue</h2>
+        <!-- <h2 :style="{opacity:opacity}">欢迎学习Vue</h2> -->
+        <button @click="opacity = 1">透明度设置为1</button>
+        <button @click="stop">点我停止变换</button>
+        <img :style="styleObj" src="./smzq.jpg" alt="">
+    </div>
+</body>
+<script type="text/javascript">
+    new Vue({
+        el: '#root',
+        data: {
+
+            opacity: 1,
+            styleObj: {
+                width: '50%',
+                heigth: '50%',
+            }
+        },
+        methods: {
+            stop() {
+                // clearInterval(this.timer)
+                this.$destroy();//销毁vm
+            }
+        },
+
+        mounted() {
+
+            console.log('mouted', this)
+            this.timer = setInterval(() => {
+                console.log('setInterval');//定时器
+                this.opacity -= 0.01
+                if (this.opacity <= 0) this.opacity = 1
+
+            }, 16)
+        },
+        beforeDestroy() {
+            //定时器 订阅 自定义事件 关掉
+            console.log('vm即将驾鹤西游了');
+            clearInterval(this.timer)
+        },
+
+    })
+
+</script>
+
+</html>

@@ -17,7 +17,9 @@
             4.生命周期函数中的this指向的是vm 或 组件实例对象
      -->
     <div id="root">
-        <h2 v-if="a">你好啊</h2>
+        
+        <h2 v-if="a">你好啊</h2> 
+         <!-- //Vue完成模板的解析并把初始的真实DOM元素放入页面后（挂载完毕）调用mounted -->
         <h2 :style="{opacity}">欢迎学习Vue</h2>
         <img :style="styleObj" src="./smzq.jpg" alt="">
         <!-- <h2 :style="{opacity:opacity}">欢迎学习Vue</h2> -->

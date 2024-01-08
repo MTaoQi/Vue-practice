@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分析生命周期</title>
+    <script type="text/javascript" src="../js/vue.js" ></script>
+</head>
+<body>
+    <div id="root">
+        <h2 v-text="n"></h2>
+            <h2>当前的n值是：{{n}}</h2>
+            <button @click="add">点我n+1</button><br/>
+            <button @click="bye">点我销毁vm</button>
+            <img style="width: 90%;" src="./smzq.png" alt="">
+    </div>
+    
+</body>
+<script type="text/javascript" >
+    new Vue({
+        el:'#root',
+        // template:`
+        // <div>
+        //     <h2>当前的n值是：{{n}}</h2>
+        //     <button @click="add">点我n+1</button>
+        // </div>
+        
+        // `,
+        data:{
+            n:1
+        },
+        methods:{
+            add(){
+                console.log('add');
+                this.n++
+            },
+            bye(){
+                console.log('bye');
+                this.$destroy()
+                //销毁 1,vm没了，工作成果在 2.不更新 
+            }
+
+        },
+        watch:{
+            n(){
+                console.log("n变了");
+            }
+
+        },
+        /* 11挂载流程 */
+        beforeCreate(){
+            console.log('beforeCreate');
+            //无法通过vm访问data数据，methods方法   
+        },
+        created(){
+            console.log('created');
+            //可以通过vm访问data数据，methods方法   
+        },
+        beforeMount() {
+            console.log('beforeMount');
+            //为经编译
+            // console.log(this) 
+            // debugger
+          
+        },
+        mounted(){
+            console.log('mounted');
+              //经编译
+            // console.log(this.$el);//真实dom
+            // debugger;
+        },
+        /* 22更新流程 */
+        beforeUpdate() {
+            console.log('beforeUpdate');
+            
+            //数据新的，页面旧的
+            //  console.log(this.n);
+            // debugger;
+        },
+         //   新的虚拟DOM与旧的虚拟DOM比较完成更新 M->V
+        updated(){
+            console.log('updated');
+            // this.n = 99
+            //数据新的，页面也是新的
+            //  console.log(this.n);
+            // debugger;
+        },
+
+
+        /* 33销毁流程 */
+        // Teardown 移除废掉 watchers 所有监视 child components 子组件 and event listeners  事件监听器
+        beforeDestroy() {
+            console.log('beforeDestroy');
+            // vm 中data数据，methods方法 ，指令 可用状态
+            // console.log(this.n)
+           // this.add()  //不会改变数据了 一般进行首尾工作
+           
+        },
+        destroyed() {
+            console.log('destroyed');
+        },
+
+    })
+</script>
+</html>
